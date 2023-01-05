@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+<!--<link rel="stylesheet" href="testys.css"/>-->
+<style>
+body {
+	background-color:#CCC
+}
+div {
+	text-align:center;
+}
+#counter {
+	text-align:left;
+	border:medium;
+	border-color:#000;
+	padding:inherit;
+	background-color:#0F0;
+	width:2%;
+	height:20px;
+	padding:0.25%;
+	border-radius:10%;
+}
+#target {
+	position:fixed;
+	left:50%;
+	top:50%;
+	border-radius:50%;
+	text-align:center;
+}
+#timer {
+	position:fixed;
+	left:41%;
+	top:1%;
+	background-color:#3F0;
+	padding:0.25%;
+	border-radius:10%;
+}
+#panel {
+	right:0;
+	top:0;
+	background-color:black;
+	color:white;
+	height:90%;
+	position:fixed;
+	padding:1%;
+	text-align:center;
+	list-style:none;
+	overflow:auto;
+}
+</style>
+</head>
+<title>Lluvia rápida</title>
+</head>
+<body>
+<div id="counter"></div>
+<b style="font-size:12px">Aqui es para ajustar tamaño de el objetivo</b><br>
+<button id="mas" onClick="wrande()" style="width:23.8px">+</button>
+<button id="menos" onClick="minus()" style="width:23.8px;">-</button>
+<div id="timer"></div>
+<ul id="panel">
+  Minutos : Segundos : Milisegundo
+</ul>
+<br>
+<button id="target" onMouseOver="action()" style="width:40px;height:40px;font-size:12px;">Aquí</button>
+<script>
+
+function wrande(){
+	var objetivo = document.getElementById("target");
+	objetivo.style.height=parseInt(objetivo.style.height) +2 +"px";
+	objetivo.style.width= parseInt(objetivo.style.width) +2 +"px";
+	objetivo.style.fontSize=parseInt(objetivo.style.fontSize)+1+"px";
+}
+
+function minus(){
+	var objetivo = document.getElementById("target");
+	objetivo.style.height=parseInt(objetivo.style.height) -2 +"px";
+	objetivo.style.width= parseInt(objetivo.style.width) -2 +"px";
+	objetivo.style.fontSize=parseInt(objetivo.style.fontSize)-1+"px";
+	}
+
+var m=0,s=0,ms=0;
+setInterval(tempo,10);
+	
+	
+	
+	function tempo() {
+		ms++;
+			if (ms>99){
+				s++;ms=0;
+			}
+			if (s>59){
+				m++;s=0;
+			}
+		var todo = (m>=10? m:"0"+m) + ":" + (s>=10? s:"0"+s) + ":" + (ms>=10? ms:"0"+ms);
+		document.getElementById("timer").innerHTML = todo;
+		var strg1=(m>=10? m:"0"+m);
+		var strg2=(s>=10? s:"0"+s);
+		var strg3=(ms>=10? ms:"0"+ms);
+		var info = {
+			"concatenado":todo,
+			"mayor": strg1+strg2+strg3,};
+	return info; 
+	}
+
+
+	var paso=1;
+	var lista;
+	
+	function action(){
+		contador();
+		paso++;
+		ordenamiento();
+		document.getElementById("panel").appendChild(lista);
+	
+		ms=0;s=0; m=0;
+		
+	 	var testy = document.getElementById("target");
+	 	var x = Math.round(Math.random()*80);
+	 	var z = x >=70 ? -25:5;
+	 	var y =Math.round(Math.random()*80);
+	 	var w = y >=70 ? -25:5;
+	 	testy.style.left = x + z + "%";
+	 	testy.style.top = y + w + "%";
+	 	var red, green, blue;
+	 	red = Math.random()*260;
+	 	green = Math.random()*260;
+	 	blue = Math.random()*260;
+	 	testy.style.backgroundColor ="rgb(" + red + "," + green + "," + blue + ")";
+		testy.style.color = "rgb(" + (red*0.1) + "," + (green*0.1) + "," + (blue*0.1) + ")";
+			
+
+	}
+	
+	
+	function contador(){
+		document.getElementById("counter").innerHTML=paso;
+		
+	 	lista = document.createElement("li");
+		lista.id="Tempo"+paso;
+		lista.className=tempo().mayor*1;
+	 	lista.innerHTML = tempo().concatenado;
+	}
+	
+	
+	function ordenamiento() {
+		var panel = document.getElementById("panel")
+		var items = panel.getElementsByTagName("li");
+
+		var sortedItems = [];// Creamos un array donde almacenaremos los "li" ordenados
+		for (var i = 0; i < items.length; i++) {// Iteramos sobre cada "li"
+			 var itemClass = items[i].className;// Obtenemos la clase del "li"
+			 sortedItems.push({// Agregamos el "li" al array de elementos ordenados, junto con su clase
+				item: items[i],
+				class: itemClass
+			  });
+		}
+			sortedItems.sort(function(a, b) {// Ordenamos el array de elementos en función de la clase de cada "li"
+			  return a.class - b.class;
+			});
+			for (var i = 0; i < sortedItems.length; i++) {// Iteramos sobre cada elemento ordenado del array
+			  panel.appendChild(sortedItems[i].item); // Agregamos cada elemento al "ul" en el orden en el que aparecen en el array
+			}
+
+	}
+
+	
+	
+	
+	 
+</script>
+</body>
