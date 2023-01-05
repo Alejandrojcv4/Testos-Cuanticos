@@ -3,30 +3,85 @@
 <head>
 <!--<link rel="stylesheet" href="testys.css"/>-->
 <style>
+
+#target { /* no mover de lugar ni crear referencia sobre esto, #target debe ser el [0] de la hoja de estilos*/
+	position:fixed;
+	left:50%;
+	top:50%;
+	background-color:red;
+	border-radius:50%;
+	text-align:center;
+	width:40px;
+	height:40px;
+	font-size:12px;/* esto esta comentado porque no me gusto la animacion*/
+	animation:testo linear infinite;
+	animation-duration: 3s;
+
+	
+}
+
+@keyframes testo{
+	
+	to{
+		background-color:#000}
+}
+
 body {
 	background-color:#CCC
 }
 div {
 	text-align:center;
 }
-#counter {
-	text-align:left;
+.totalitario {
+	text-align:center;
 	border:medium;
 	border-color:#000;
-	padding:inherit;
-	background-color:#0F0;
-	width:2%;
-	height:20px;
-	padding:0.25%;
+	background-color:#00F;
+	width:10%;
+	padding:1%;
 	border-radius:10%;
+	font-size:12px;
+	color:#0F0;
+	display:compact;
 }
-#target {
-	position:fixed;
-	left:50%;
-	top:50%;
-	border-radius:50%;
+
+.fuera {
+	display:none}
+
+.login {
+	left:35%; 
+	background:#00C; 
+	width:35%; 
+	position:absolute; 
+	border-radius:5%; 
+	color:#0F0;
+}
+
+#counter {
 	text-align:center;
+	background-color:#0F0;
+	width:100%;
+	height:22px;
+	font-size:15px;
+	color:#000;
 }
+
+.botones {
+	border-spacing: 5px 1rem;
+	box-sizing:border-box;
+
+}
+.botonmasmenos {
+	width:24px;
+	height:24px;
+	background-color:#9FF;
+	color:#F00;
+	border-color:#F06;
+	border-radius:50%;
+	border-spacing: 5px;	
+}
+
+
 #timer {
 	position:fixed;
 	left:41%;
@@ -34,6 +89,8 @@ div {
 	background-color:#3F0;
 	padding:0.25%;
 	border-radius:10%;
+	color:#000;
+	font-size:14px;
 }
 #panel {
 	right:0;
@@ -46,101 +103,146 @@ div {
 	text-align:center;
 	list-style:none;
 	overflow:auto;
+	width:12%;
+	font-size:14px;
 }
 </style>
-</head>
 <title>Lluvia rápida</title>
 </head>
-<body>
-<div id="counter"></div>
-<b style="font-size:12px">Aqui es para ajustar tamaño de el objetivo</b><br>
-<button id="mas" onClick="wrande()" style="width:23.8px">+</button>
-<button id="menos" onClick="minus()" style="width:23.8px;">-</button>
-<div id="timer"></div>
-<ul id="panel">
-  Minutos : Segundos : Milisegundo
-</ul>
-<br>
-<button id="target" onMouseOver="action()" style="width:40px;height:40px;font-size:12px;">Aquí</button>
-<script>
-
-function wrande(){
-	var objetivo = document.getElementById("target");
-	objetivo.style.height=parseInt(objetivo.style.height) +2 +"px";
-	objetivo.style.width= parseInt(objetivo.style.width) +2 +"px";
-	objetivo.style.fontSize=parseInt(objetivo.style.fontSize)+1+"px";
-}
-
-function minus(){
-	var objetivo = document.getElementById("target");
-	objetivo.style.height=parseInt(objetivo.style.height) -2 +"px";
-	objetivo.style.width= parseInt(objetivo.style.width) -2 +"px";
-	objetivo.style.fontSize=parseInt(objetivo.style.fontSize)-1+"px";
-	}
-
-var m=0,s=0,ms=0;
-setInterval(tempo,10);
-	
-	
-	
-	function tempo() {
-		ms++;
-			if (ms>99){
-				s++;ms=0;
-			}
-			if (s>59){
-				m++;s=0;
-			}
-		var todo = (m>=10? m:"0"+m) + ":" + (s>=10? s:"0"+s) + ":" + (ms>=10? ms:"0"+ms);
-		document.getElementById("timer").innerHTML = todo;
-		var strg1=(m>=10? m:"0"+m);
-		var strg2=(s>=10? s:"0"+s);
-		var strg3=(ms>=10? ms:"0"+ms);
-		var info = {
-			"concatenado":todo,
-			"mayor": strg1+strg2+strg3,};
-	return info; 
-	}
+<body >
+<form id="login" class="fuera">
+  <div > <br>
+    <label >Correo Electronico:</label>
+    <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div id="emailHelp" style=" font-style:italic; font-size:small; color:#F00">Te prometo que nadie lo compartira :v</div>
+    <br>
+  </div>
+  <div id="contra">
+    <label >Contraseña:</label>
+    <input type="password" id="exampleInputPassword1">
+    <br>
+    <div id="contraneeds" style=" font-style:italic; font-size:small; color:#F00; display:inline">Debe tener minimo 8 digitos compuesto de mayuscula, minuscula, numero y simbolos.</div>
+    <br>
+  </div>
+  <br>
+  <button type="submit" style=" position:relative;left:50%" onClick="activador()">Enter</button>
+  <br>
+  <br>
+</form>
 
 
-	var paso=1;
-	var lista;
+<div id="contador total" class="totalitario">
+  <div id="counter"></div><br>
+  <b class="totalitario">Aqui es para ajustar tamaño de el objetivo</b><br><br>
+  <tr class="botones">	
+  	<td> 
+    	<button id="mas" onClick="wrande()" class="botonmasmenos">+</button>
+    </td>
+  	<td>
+    	<button id="menos" onClick="minus()" class="botonmasmenos">-</button>
+    </td>
 	
-	function action(){
-		contador();
-		paso++;
-		ordenamiento();
-		document.getElementById("panel").appendChild(lista);
+  </tr>
+  <div id="timer" style="left:48%; top:0"></div>
+  <ul id="panel">
+    Minutos : Segundos : Milisegundo
+  </ul>
+  <br><button id="target" onMouseOver="action()">Aquí</button>
+</div>
+
+
+
+<script> //este es para el boton de + y - que ajustan el tamaño del objetivo
 	
-		ms=0;s=0; m=0;
 		
-	 	var testy = document.getElementById("target");
-	 	var x = Math.round(Math.random()*80);
-	 	var z = x >=70 ? -25:5;
-	 	var y =Math.round(Math.random()*80);
-	 	var w = y >=70 ? -25:5;
-	 	testy.style.left = x + z + "%";
-	 	testy.style.top = y + w + "%";
-	 	var red, green, blue;
-	 	red = Math.random()*260;
-	 	green = Math.random()*260;
-	 	blue = Math.random()*260;
-	 	testy.style.backgroundColor ="rgb(" + red + "," + green + "," + blue + ")";
-		testy.style.color = "rgb(" + (red*0.1) + "," + (green*0.1) + "," + (blue*0.1) + ")";
-			
-
+	function wrande(){
+		var testy = document.styleSheets[0].rules[0];
+		testy.style.height=parseInt(testy.style.height) +2 +"px";
+		testy.style.width= parseInt(testy.style.width) +2 +"px";
+		testy.style.fontSize=parseInt(testy.style.fontSize)+1+"px";
 	}
 	
+	function minus(){
+		var testy = document.styleSheets[0].rules[0];
+		testy.style.height=parseInt(testy.style.height) -2 +"px";
+		testy.style.width= parseInt(testy.style.width) -2 +"px";
+		testy.style.fontSize=parseInt(testy.style.fontSize)-1+"px";
+	}
+		
+</script> 
+<script>
+var validador1, validador2;//estos son parametros de verificacion, valor entre 0 y 1 deberian ser (debo descubrir como hacerlos fijos), solo sirven para definir si el correo y la contraseña estan bien
+
+
+ /* este script es para hacer el login*/
+var m=0,s=0,ms=0,infoUsuario,start=0;
+var activador = function() {
+	var login= document.getElementById("login");
+	
+	infoUsuario = {
+		email:document.getElementById("exampleInputEmail1").value,
+		contrasela:document.getElementById("exampleInputPassword1").value,
+		};
+	
+	function validateEmail(WeaWena) {
+		const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(String(WeaWena).toLowerCase());
+	};
+	
+	function validatePassword(WeaMala) {
+		const re2 = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040-,.])\S{7,}$/;
+		return re2.test(WeaMala);
+	};
+
+	if (validateEmail(infoUsuario.email)) {
+		document.getElementById("exampleInputEmail1").style = "color:fieldtext;";
+		validador1=1;
+		document.getElementById("emailHelp").innerHTML = "Te prometo que nadie lo compartira :v";
+	} else {
+  		document.getElementById("exampleInputEmail1").style = "color:#F00;background-color:#CCC;";
+		validador1=0;
+		document.getElementById("emailHelp").innerHTML = "Correo Invalido";
+		document.getElementById("emailHelp").style = "font-size:small; color:#F00;font-style:bold;";
+	};
+	
+	if (validatePassword(infoUsuario.contrasela)) {
+		document.getElementById("exampleInputPassword1").style = "color:fieldtext;";
+		validador2=1;
+		document.getElementById("contraneeds").style= "display:none;"
+	} else {
+  		console.log("La contraseña no sirve");
+		document.getElementById("exampleInputPassword1").style = "color:#F00;background-color:#CCC;";
+		validador2=0;
+		document.getElementById("exampleInputPassword1").value = "";
+		document.getElementById("exampleInputPassword1").placeholder = "La contraseña no sirve";
+			
+	}
+	
+	login.addEventListener("click", function(event) { event.preventDefault() }  );
+	
+	if (validador1*validador2 == 1){
+		login.remove();
+		document.getElementById("contador total").className="totalitario";
+		start=1;
+	}
+
+	
+};
+	
+	/*Desde aqui incia el juego real*/
+
+do{
+	setInterval(tempo,10);
+	var lista;	
 	
 	function contador(){
 		document.getElementById("counter").innerHTML=paso;
 		
 	 	lista = document.createElement("li");
 		lista.id="Tempo"+paso;
-		lista.className=tempo().mayor*1;
-	 	lista.innerHTML = tempo().concatenado;
+		lista.className=info.mayor*1;
+	 	lista.innerHTML = info.concatenado;
 	}
-	
 	
 	function ordenamiento() {
 		var panel = document.getElementById("panel")
@@ -160,12 +262,57 @@ setInterval(tempo,10);
 			for (var i = 0; i < sortedItems.length; i++) {// Iteramos sobre cada elemento ordenado del array
 			  panel.appendChild(sortedItems[i].item); // Agregamos cada elemento al "ul" en el orden en el que aparecen en el array
 			}
-
+	}
+	var info;
+	function tempo() {
+		ms++;
+			if (ms>99){
+				s++;ms=0;
+			}
+			if (s>59){
+				m++;s=0;
+			}
+		var todo = (m>=10? m:"0"+m) + ":" + (s>=10? s:"0"+s) + ":" + (ms>=10? ms:"0"+ms);
+		document.getElementById("timer").innerHTML = todo;
+		var strg1=(m>=10? m:"0"+m);
+		var strg2=(s>=10? s:"0"+s);
+		var strg3=(ms>=10? ms:"0"+ms);
+		info = {
+			"concatenado":todo,
+			"mayor": strg1+strg2+strg3,};
+	return info; 
 	}
 
+
+	var paso=1;
 	
 	
+	function action(){
+		ordenamiento();
+		contador();
+		paso++;
+		
+		document.getElementById("panel").appendChild(lista);
 	
-	 
+		ms=0;s=0; m=0;
+		
+	 	var testy = document.styleSheets[0].rules[0];
+	 	var x = Math.round(Math.random()*80);
+	 	
+	 	var y =Math.round(Math.random()*80);
+		
+	 	testy.style.left = x + "%";
+	 	testy.style.top = y + "%";
+	 	var red, green, blue;
+	 	red = Math.random()*260;
+	 	green = Math.random()*260;
+	 	blue = Math.random()*260;
+	 	testy.style.backgroundColor ="rgb(" + red + "," + green + "," + blue + ")";
+		testy.style.color = "rgb(" + (red*0.1) + "," + (green*0.1) + "," + (blue*0.1) + ")";
+	
+	}
+	
+}while(start==1);
+
 </script>
 </body>
