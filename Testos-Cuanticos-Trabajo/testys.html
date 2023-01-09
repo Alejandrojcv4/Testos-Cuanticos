@@ -1,0 +1,57 @@
+<!doctype html>
+
+    <head>
+        <link rel="stylesheet" href="./src/styles/index.css"/>
+        <script src="./src/js/utils.js"></script>
+        <title>Lluvia rápida</title>
+    </head>
+<body >
+    <form id="login" class="login">
+		
+        <div > 
+			<br>
+        	<label >Correo Electronico:</label>
+        	<input type="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+       		<div id="emailHelp" style=" font-style:italic; font-size:small; color:#F00">Te prometo que nadie lo compartira :v</div>
+        	<br>
+      </div>
+      
+      <div id="contra">
+        <label >Contraseña:</label>
+        <input type="password" id="exampleInputPassword1">
+        <br>
+        <div id="contraneeds">Debe tener minimo 8 digitos compuesto de mayuscula, minuscula, numero y simbolos.</div>
+      	<br>
+      </div>
+      <br>
+      <button class="loginboton" type="submit" onClick="activador(event)">Enter</button>
+      <button class="loginboton" type="button" onClick="skip()">Skip Login</button>
+      <br>
+      <br>
+    </form>
+    
+    
+    <div id="contador total" class="fuera">
+      <div id="counter"></div><br>
+      <b class="totalitario">Aqui es para ajustar tamaño de el objetivo</b><br><br>
+      <tr class="botones ">	
+        <td> 
+            <button type="button" id="mas" onClick="wrande()" class="botonmasmenos">+</button>
+        </td>
+        <td>
+            <button type="button" id="menos" onClick="minus()" class="botonmasmenos">-</button>
+        </td>
+        
+      </tr>
+      <div id="timer"></div>
+      <ul id="panel">
+        Minutos : Segundos : Milisegundo
+      </ul>
+      <br>
+      <button type="button" style="width: 40px; height:40px; font-size:12px" class="target" id="target" onMouseOver="action(this)">Aquí</button>
+    </div>
+    
+    
+    
+    
+</body>
