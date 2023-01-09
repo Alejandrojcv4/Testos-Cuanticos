@@ -23,7 +23,7 @@
 @keyframes testo{
 	
 	to{
-		background-color:#000}
+		top:100%;}
 }
 
 body {
@@ -110,7 +110,7 @@ div {
 <title>Lluvia rápida</title>
 </head>
 <body >
-<form id="login" class="fuera">
+<form id="login" class="login">
   <div > <br>
     <label >Correo Electronico:</label>
     <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -131,7 +131,7 @@ div {
 </form>
 
 
-<div id="contador total" class="totalitario">
+<div id="contador total" class="fuera">
   <div id="counter"></div><br>
   <b class="totalitario">Aqui es para ajustar tamaño de el objetivo</b><br><br>
   <tr class="botones">	
@@ -179,7 +179,7 @@ var m=0,s=0,ms=0,infoUsuario,start=0;
 var activador = function() {
 	var login= document.getElementById("login");
 	
-	infoUsuario = {
+	infoUsuario = {
 		email:document.getElementById("exampleInputEmail1").value,
 		contrasela:document.getElementById("exampleInputPassword1").value,
 		};
